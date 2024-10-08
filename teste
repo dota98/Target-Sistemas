@@ -1,0 +1,82 @@
+import json
+
+
+INDICE = 13
+SOMA = 0
+K = 0
+
+while K < INDICE:
+    K = K + 1
+    SOMA = SOMA + K
+
+print("1) Valor final da variável SOMA:", SOMA)
+
+
+def is_fibonacci(n):
+    fib_0 = 0
+    fib_1 = 1
+    fib_next = fib_0 + fib_1
+    
+    while fib_next < n:
+        fib_0 = fib_1
+        fib_1 = fib_next
+        fib_next = fib_0 + fib_1
+    
+    if n == fib_next or n == 0 or n == 1:
+        return f"{n} pertence à sequência de Fibonacci."
+    else:
+        return f"{n} não pertence à sequência de Fibonacci."
+
+numero = int(input("Informe um número para a sequência de Fibonacci: "))
+print("2)", is_fibonacci(numero))
+
+
+dados_faturamento = '''
+[
+    {"dia": 1, "valor": 1000.0},
+    {"dia": 2, "valor": 2000.0},
+    {"dia": 3, "valor": 0.0},
+    {"dia": 4, "valor": 2500.0},
+    {"dia": 5, "valor": 0.0},
+    {"dia": 6, "valor": 3000.0}
+]
+'''
+
+faturamento = json.loads(dados_faturamento)
+faturamento = [d['valor'] for d in faturamento if d['valor'] > 0]
+
+menor_faturamento = min(faturamento)
+maior_faturamento = max(faturamento)
+media_faturamento = sum(faturamento) / len(faturamento)
+
+dias_acima_da_media = len([valor for valor in faturamento if valor > media_faturamento])
+
+print(f"3) Menor faturamento: R${menor_faturamento:.2f}")
+print(f"   Maior faturamento: R${maior_faturamento:.2f}")
+print(f"   Dias com faturamento acima da média: {dias_acima_da_media}")
+
+
+faturamento_estados = {
+    'SP': 67836.43,
+    'RJ': 36678.66,
+    'MG': 29229.88,
+    'ES': 27165.48,
+    'Outros': 19849.53
+}
+
+faturamento_total = sum(faturamento_estados.values())
+percentuais = {estado: (valor / faturamento_total) * 100 for estado, valor in faturamento_estados.items()}
+
+print("4) Percentual de faturamento por estado:")
+for estado, percentual in percentuais.items():
+    print(f"   {estado}: {percentual:.2f}% do faturamento total")
+
+
+def inverter_string(s):
+    invertida = ""
+    for i in range(len(s)-1, -1, -1):
+        invertida += s[i]
+    return invertida
+
+string = input("Informe uma string para inverter: ")
+print("5) String invertida:", inverter_string(string))
